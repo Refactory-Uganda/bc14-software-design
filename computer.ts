@@ -110,13 +110,17 @@ class Desktop extends Computer implements WiFiSupportedDevice, BluetoothSupporte
     // we can add extra funbctionality but must first conform to teh computer Contract
     deskPlacement(){}
     connectToWIFI() {
-        return "Wi-Fi using a laptop";
+        return "Wi-Fi connection established on Desktop";
     }
 
     connectToBleatooth(){
         console.log('Connecting to Bluetooth.');
     }
 }
+
+const desktop1 = new Desktop(new Keyboard());
+
+console.log(desktop1.connectToWIFI());
 
 class Laptop extends Computer{
     // We can add extra functionality to this class   

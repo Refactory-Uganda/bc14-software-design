@@ -1,12 +1,6 @@
-/*
-    Computer class:
-    - Can input data
-    - can store & retrieve data to memory
-    - can process data
-    - Can output data
-    - can connect to WI-FI
-    - can connect bluetooth device
-*/
+// SRP => A class should have only one reason to change
+// DIP => A High level module should not depend on a Low Level module,
+// instead both should depend on abstraction
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -22,27 +16,18 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
-// class Keyboard{
-//     input(){
-//         console.log("Inputing data from keyboard...");
-//     }
-// }
+/*
+    Computer class:
+    - Can input data
+    - can store & retrieve data to memory
+    - can process data
+    - Can output data
+    - can connect to WI-FI
+    - can connect bluetooth device
+*/
 var InputDevice = /** @class */ (function () {
     function InputDevice() {
     }
-    InputDevice.prototype.input = function () {
-    };
     return InputDevice;
 }());
 var Keyboard = /** @class */ (function (_super) {
@@ -51,7 +36,7 @@ var Keyboard = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     Keyboard.prototype.input = function () {
-        console.log('Inputing from Keyboard');
+        console.log("Inputing data from keyboard...");
     };
     return Keyboard;
 }(InputDevice));
@@ -61,52 +46,42 @@ var Mouse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     Mouse.prototype.input = function () {
-        console.log('Inputing from Mouse');
+        console.log("Inputing data from Mouse...");
     };
     return Mouse;
 }(InputDevice));
-// supertype 
+// Supertype / Contract
 var Computer = /** @class */ (function () {
-    // To use private: define a constructor
     function Computer(InputDevice) {
-        this.category = "generic";
-        this.internalMemory = {};
-        this.InputDevice = InputDevice;
+        this.inputDevice = InputDevice;
     }
+    // Input
     Computer.prototype.input = function () {
-        this.InputDevice.input();
+        this.inputDevice.input();
     };
-    // method only works for variable input device 
-    Computer.prototype.setInputDevice = function (InputDevice) {
-        this.InputDevice = InputDevice;
+    Computer.prototype.setInputDevice = function (inputDevice) {
+        this.inputDevice = inputDevice;
     };
     Computer.prototype.getInputDevice = function () {
-        return this.InputDevice;
+        return this.inputDevice;
     };
+    // Process
     Computer.prototype.process = function () {
-        console.log('Process with intel processor');
+        console.log("process with Intel processor...");
     };
+    // Store
     Computer.prototype.store = function (data) {
         console.log("Storing data into internal memory...");
-        this.internalMemory = __assign(__assign({}, this.internalMemory), data);
     };
+    // Retrieve
     Computer.prototype.retrieve = function (key) {
         console.log("Retrieving data from internal memory...");
-        return this.internalMemory[key];
     };
+    // Output
     Computer.prototype.output = function (information) {
         console.log(information);
     };
-    Computer.prototype.connectToBluetoothDevice = function () {
-        console.log("Connecting to Bluetooth Device...");
-    };
     return Computer;
-}());
-// abstract class
-var ConnectToEthernet = /** @class */ (function () {
-    function ConnectToEthernet() {
-    }
-    return ConnectToEthernet;
 }());
 // concrete classes 
 var Desktop = /** @class */ (function (_super) {
@@ -117,70 +92,64 @@ var Desktop = /** @class */ (function (_super) {
     // we can add extra funbctionality but must first conform to teh computer Contract
     Desktop.prototype.deskPlacement = function () { };
     Desktop.prototype.connectToWIFI = function () {
-        return "Wi-Fi using a laptop";
+        return "Wi-Fi connection established on Desktop";
     };
-    Desktop.prototype.connectToBluetooth = function () {
-        console.log("Connect to Bluetooth");
+    Desktop.prototype.connectToBleatooth = function () {
+        console.log('Connecting to Bluetooth.');
     };
     return Desktop;
 }(Computer));
 var desktop1 = new Desktop(new Keyboard());
-console.log("I am connected to " + desktop1.connectToWIFI());
+console.log(desktop1.connectToWIFI());
 var Laptop = /** @class */ (function (_super) {
     __extends(Laptop, _super);
     function Laptop() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    // we can add extra funbctionality but must first conform to teh computer Contract
-    Laptop.prototype.palmRest = function () { };
-    Laptop.prototype.connectToWIFI = function () {
-        console.log("Connect to Wifi");
-    };
-    Laptop.prototype.connectToBluetooth = function () {
-        console.log('Connect to bluetooth');
-    };
+    // We can add extra functionality to this class   
+    Laptop.prototype.fold = function () { };
     return Laptop;
 }(Computer));
-var Phone = /** @class */ (function (_super) {
-    __extends(Phone, _super);
-    function Phone() {
+var Walltop = /** @class */ (function (_super) {
+    __extends(Walltop, _super);
+    function Walltop() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    // we can add extra funbctionality but must first conform to teh computer Contract
-    Phone.prototype.screenTouch = function () { };
-    Phone.prototype.connectToWIFI = function () {
-        console.log("Connect to Wifi");
-    };
-    return Phone;
+    // We can add extra functionality to this class   
+    Walltop.prototype.hang = function () { };
+    return Walltop;
 }(Computer));
-// Violates Liskov since it doesn't conform to the methods in supertype Computer
-var OldModel = /** @class */ (function (_super) {
-    __extends(OldModel, _super);
-    function OldModel() {
+var SmartPhone = /** @class */ (function (_super) {
+    __extends(SmartPhone, _super);
+    function SmartPhone() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    // we can add extra funbctionality but must first conform to teh computer Contract
-    OldModel.prototype.legacyMethod = function () { };
-    return OldModel;
+    // We can add extra functionality to this class   
+    SmartPhone.prototype.screenTouch = function () { };
+    return SmartPhone;
+}(Computer));
+var OldModelComputer = /** @class */ (function (_super) {
+    __extends(OldModelComputer, _super);
+    function OldModelComputer() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    // We can add extra functionality to this class
+    OldModelComputer.prototype.legacyMethod = function () {
+    };
+    return OldModelComputer;
 }(Computer));
 // Computer Objects
-// let computer1 = new Computer();
-// computer1.InputDevice = new Keyboard();
-// computer1.InputDevice = new Mouse();
-// Changes
 var computer1 = new Computer(new Keyboard());
-// setting the input device after the object is created
-// Change input device dynamically using a setter - can set a valye multiple times 
+// Change inpute device dynamically using a setter
 computer1.setInputDevice(new Mouse());
-// computer1.setInputDevice(new Keyboard());
-// Getters - acess the value of a private variable or field using the getter 
+// Access the value of a private field using a getter
 console.log(computer1.getInputDevice());
+// Tests
 function testComputer(computer) {
     computer.input();
-    computer.retrieve("name");
-    // computer.output(computer.category);
-    computer.output("just");
     computer.process();
-    computer.connectToBluetoothDevice();
+    computer.store("any thing");
+    computer.retrieve("name");
+    computer.output("just");
 }
 testComputer(computer1);
