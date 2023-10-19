@@ -40,9 +40,9 @@ class Computer{
 
     private inputDevice:InputDevice;
 
-    // Methods
-    constructor(inputDevice:InputDevice){
-        this.inputDevice = inputDevice
+
+    constructor(InputDevice:InputDevice){
+        this.inputDevice = InputDevice;
     }
 
     // Input
@@ -83,17 +83,34 @@ class Computer{
 interface WiFiSupportedDevice{
     connectToWIFI();
 }
+// const ipad = new Computer(new Keyboard());
+
+// ipad.store("information");
+
+
+// const ipad = new Computer();
+
+// ipad.setInputDevice(new Keyboard());
+// ipad.setInputDevice(new Mouse());
+
+
+// Liskov Substitution principle - supertype contract must first be implemented so all subtypes can be substituted in.
+// Is-a Relationship
+
+// interface / abstraxt classs helps set rules no implementaions are required
+
 
 interface BluetoothSupportedDevice{
     connectToBleatooth();
 }
 
-// Is-A Relationship LSP & ISP
+
+// concrete classes 
 class Desktop extends Computer implements WiFiSupportedDevice, BluetoothSupportedDevice{
-    // We can add extra functionality to this class
-    balance(){}
-    connectToWIFI(){
-        console.log('Connecting to wifi.');
+    // we can add extra funbctionality but must first conform to teh computer Contract
+    deskPlacement(){}
+    connectToWIFI() {
+        return "Wi-Fi using a laptop";
     }
 
     connectToBleatooth(){
