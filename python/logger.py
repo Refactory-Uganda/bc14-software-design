@@ -1,8 +1,7 @@
-from strategy import LoginStrategy
+from strategy import *
 class IAMlogger:
     _instance = None
     _user = None
-    _login_strategy:LoginStrategy = any
 
     def __init__(self, user):
         if IAMlogger._instance is not None:
@@ -17,6 +16,10 @@ class IAMlogger:
             IAMlogger._login_strategy.login(credentials)
             cls._instance = cls(credentials)
         return cls._instance
+    
+    @classmethod
+    def set_login_strategy(cls, login_strategy:LoginStrategy):
+        cls._login_strategy = login_strategy
 
     @classmethod
     def logout(cls):
@@ -35,19 +38,22 @@ class IAMlogger:
 
 from strategy import UsernamePasswordStrategy,EmailPasswordStrategy
 
-IAMlogger.set_login_strategy(UsernamePasswordStrategy())
+
 IAMlogger.login({"username":"senjack", "password":"password"})
 print(IAMlogger.getUserDetails())
 IAMlogger.logout()
 
+IAMlogger.login({"username":"demetira", "password":"demetira1"})
+print(IAMlogger.getUserDetails())
+IAMlogger.logout()
+
 IAMlogger.set_login_strategy(EmailPasswordStrategy())
-IAMlogger.login({"email":"demetira", "password":"demetira1"})
+IAMlogger.login({"email":"josiah@gmail.com", "password":"sk"})
 print(IAMlogger.getUserDetails())
+IAMlogger.logout()
 
-IAMlogger.login({"username":"josiah", "password":"sk"})
-print(IAMlogger.getUserDetails())
-
-IAMlogger.login({"username":"hajat", "password":"nisha"})
+IAMlogger.set_login_strategy(PhonenumberPasswordStrategy())
+IAMlogger.login({"phonenumber":"3256789080", "password":"nisha"})
 print(IAMlogger.getUserDetails())
 
 
