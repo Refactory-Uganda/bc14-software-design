@@ -4,18 +4,24 @@ from memory import Memory
 from output_devices import OutputDevice
 from processors import Processor
 from wifi import WiFiDevice
+from abc import ABC, abstractmethod
+
 
 class Computer:
     """
     The responsibility of this Computer class is to control other Peripherals.
     And control is the only reason why Computer would change.
     """
-
     def __init__(self, input_device: InputDevice, processor: Processor, memory: Memory, output_device: OutputDevice):
         self._input_device = input_device
         self._processor = processor
         self._memory = memory
         self._output_device = output_device
+
+
+    @abstractmethod
+    def cost(self) -> int:
+        return 500
 
     def input(self):
         self._input_device.input()
