@@ -127,3 +127,25 @@ Sprint_04:
   # Requirements:
     - At the end of it all, Standard Computer Types should vary independently from major Computer Brands.
 
+Sprint_05:
+  # Sprint Goal: Implementing the Decorator Design Pattern
+
+  # The Problem:
+    # The Company undoubtably believes that the a computer developed following the current model is feature rich.
+    # And in that sense, the company feels like computers are currently less prifitable.
+    # The company belieaves that there can be a new way around pricing computers to boost the profit margin.
+
+  # Proposal:
+    # The Company has proposed a new approach to pricing,
+    # where by on top of the standard price set for a particular Computer,
+    # it's price can keep rising with addition of extra peripherals.
+    # Below are some of the peripherals and features which can be used added to the computer,
+    # hence causing its value to change.
+
+  # Requirements:
+    - Pluggable Mouse
+    - External keyboard
+    - Wireless Mouse
+    - External Storage Device
+    - Bluetooth Supported Headsets
+
