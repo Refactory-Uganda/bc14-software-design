@@ -4,7 +4,8 @@ from input_devices import Keyboard, Mouse
 from memory import PrimaryMemory, SecondaryMemory
 from output_devices import Monitor, Projector
 from processors import AMD, Intel, NVIDIA
-
+from facade import *
+from brands import Lenovo
 
 # Step 3: Create an abstract decorator class for implementing the Computer interface.
 class ComputerDecorator(Computer, ABC):
@@ -33,7 +34,7 @@ class WirelessSpeakerDecorator(WirelessDecorator):
 
 
 # Step 5: Use the decorators to decorate Computer objects.
-computer1 = Computer(Mouse(), AMD(), PrimaryMemory(), Monitor())
+computer1 = Computer(Mouse(), AMD(), PrimaryMemory(), Monitor(),Lenovo(),ComputerFacade(Display(),DVD(),Speaker()))
 
 print(computer1.cost())
 
