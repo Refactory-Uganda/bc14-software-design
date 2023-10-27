@@ -4,6 +4,8 @@ from memory import Memory
 from output_devices import OutputDevice
 from processors import Processor
 from wifi import WiFiDevice
+from abc import ABC, abstractmethod
+
 from brands import Brand
 from facade import ComputerFacade
 
@@ -20,6 +22,11 @@ class Computer:
         self._output_device = output_device
         self._brand = brand
         self._movie = movie
+
+
+    @abstractmethod
+    def cost(self) -> int:
+        return 500
 
     def set_movie_system(self,movie:ComputerFacade):
         self._brand.set_movie_system()
