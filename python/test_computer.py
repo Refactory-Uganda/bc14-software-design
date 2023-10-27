@@ -5,6 +5,7 @@ from output_devices import Monitor, Projector
 from processors import AMD, Intel, NVIDIA
 from brands import Dell
 
+
 computer1: Computer = None
 
 computer1 = Laptop(Keyboard(), Intel(), PrimaryMemory(), Monitor(),Dell())
@@ -30,3 +31,5 @@ def test_computer(computer: Computer):
     computer.output("OutputData: Bootcamp 14...")
 
 test_computer(computer1)
+
+

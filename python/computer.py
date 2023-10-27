@@ -5,6 +5,7 @@ from output_devices import OutputDevice
 from processors import Processor
 from wifi import WiFiDevice
 from brands import Brand
+from proxy import SearchService
 
 class Computer:
     """
@@ -12,16 +13,18 @@ class Computer:
     And control is the only reason why Computer would change.
     """
 
-    def __init__(self, input_device: InputDevice, processor: Processor, memory: Memory, output_device: OutputDevice,brand:Brand):
+    def __init__(self, input_device: InputDevice, processor: Processor, memory: Memory, output_device: OutputDevice,brand:Brand,searchservice:SearchService):
         self._input_device = input_device
         self._processor = processor
         self._memory = memory
         self._output_device = output_device
         self._brand = brand
+        self._searchservice = searchservice
 
     def input(self):
         self._input_device.input()
 
+    
     def set_input_device(self, input_device: InputDevice):
         self._input_device = input_device
 
@@ -60,6 +63,10 @@ class Computer:
     
     def boot(self):
         self._brand.boot()
+
+    def search(self):
+        self._searchservice.search()
+
     
 
 
